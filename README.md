@@ -46,7 +46,7 @@ We are a **Toronto family medicine practice** focused on proactive, OHIP-funded 
 - **[Railway](https://railway.app)** - Hosting platform - *Replaces Vercel*
 - **[tRPC](https://trpc.io)** - End-to-end typesafe APIs
 
-> **⚠️ Version Note (November 2024)**: This project uses Next.js 15.2.4 and React 19. These are relatively new versions. If you encounter compatibility issues, consider waiting for the ecosystem to mature or pinning to these specific versions until you're ready to upgrade.
+> **⚠️ Version Note (November 2025)**: This project uses Next.js 15.2.4 and React 19. These are relatively new versions. If you encounter compatibility issues, consider waiting for the ecosystem to mature or pinning to these specific versions until you're ready to upgrade.
 
 ## How It Works
 
