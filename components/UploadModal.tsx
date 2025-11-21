@@ -9,7 +9,6 @@ import {
 import Dropzone from "react-dropzone";
 import React, { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { useS3Upload } from "next-s3-upload";
 import { useRouter } from "next/navigation";
 import { useTRPC } from "@/trpc/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -39,7 +38,41 @@ export function UploadModal({ onClose }: { onClose: () => void }) {
   >("idle");
 
   const [isDragActive, setIsDragActive] = useState(false);
-  const { uploadToS3 } = useS3Upload();
+
+  // Custom upload function for Backblaze B2
+  const uploadToS3 = async (file: File) => {
+    // Get presigned URL from our API
+    const response = await fetch("/api/s3-upload", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fileName: file.name,
+        fileType: file.type,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get upload URL");
+    }
+
+    const { uploadUrl, url } = await response.json();
+
+    // Upload file to S3 using presigned URL
+    const uploadResponse = await fetch(uploadUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
+
+    if (!uploadResponse.ok) {
+      throw new Error("Failed to upload file");
+    }
+
+    return { url };
+  };
+
   const router = useRouter();
   const trpc = useTRPC();
   const { apiKey } = useTogetherApiKey();

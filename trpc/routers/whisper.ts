@@ -1,6 +1,5 @@
 import { t } from "../init";
 import { z } from "zod";
-import { PrismaClient } from "../../lib/generated/prisma";
 import { v4 as uuidv4 } from "uuid";
 import { protectedProcedure } from "../init";
 import { limitMinutes } from "@/lib/limits";
@@ -9,8 +8,7 @@ import {
   togetherVercelAiClient,
 } from "@/lib/apiClients";
 import { generateText } from "ai";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export const whisperRouter = t.router({
   listWhispers: protectedProcedure.query(async ({ ctx }) => {

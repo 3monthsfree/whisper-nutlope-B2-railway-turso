@@ -26,6 +26,7 @@ const isAuthed = t.middleware(({ next, ctx }) => {
   return next({
     ctx: {
       auth: ctx.auth,
+      togetherApiKey: ctx.togetherApiKey,
     },
   });
 });

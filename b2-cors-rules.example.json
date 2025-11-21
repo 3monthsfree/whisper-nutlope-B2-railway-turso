@@ -1,0 +1,25 @@
+[
+  {
+    "corsRuleName": "allowAllOrigins",
+    "allowedOrigins": [
+      "https://your-domain.com",
+      "http://localhost:3000",
+      "http://localhost:3001"
+    ],
+    "allowedOperations": [
+      "s3_delete",
+      "s3_get",
+      "s3_head",
+      "s3_post",
+      "s3_put"
+    ],
+    "allowedHeaders": [
+      "*"
+    ],
+    "exposeHeaders": [
+      "ETag",
+      "x-amz-request-id"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]
